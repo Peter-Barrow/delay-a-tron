@@ -1,0 +1,30 @@
+[project]
+name = "delay-a-tron"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "peter.barrow.93@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "ipython>=8.37.0",
+    "pyqt6>=6.10.1",
+    "pyserial>=3.5",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+delay_a_tron = ["ui/*.ui"]
+
+[project.scripts]
+delayatron = "delay_a_tron.delay_ui:main"
