@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Self
+# from typing import Self
 from dataclasses import dataclass
 from time import sleep
 import serial
@@ -27,7 +27,7 @@ class AgiltronConnectionConfig:
     baudrate: int = 9600
     timeout: float | None = 1.0
     bytesize: int = serial.EIGHTBITS
-    parity: int = serial.PARITY_NONE
+    parity = serial.PARITY_NONE
     stop_bits: int = serial.STOPBITS_ONE
 
 
@@ -356,7 +356,7 @@ class AgiltronDelay:
         baudrate: int = 9600,
         timeout: float | None = 1.0,
         bytesize: int = serial.EIGHTBITS,
-        parity: int = serial.PARITY_NONE,
+        parity=serial.PARITY_NONE,
         stop_bits: int = serial.STOPBITS_ONE,
         wait: bool = True,
         wait_time: float = 0.1,
@@ -384,7 +384,7 @@ class AgiltronDelay:
             baudrate,
             timeout,
             bytesize,
-            parity,
+            # parity,
             stop_bits,
         )
 
@@ -552,7 +552,7 @@ class AgiltronDelay:
         """
         return hasattr(self, 'device') and self.device.is_open
 
-    def __enter__(self) -> Self:
+    def __enter__(self) -> 'AgiltronDelay':
         """Enter context manager.
 
         Ensures the device connection is open before returning.
