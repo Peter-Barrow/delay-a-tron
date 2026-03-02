@@ -30,7 +30,7 @@ if sys.version_info >= (3, 9):
 
     def get_ui_path(ui_filename):
         """Get path to UI file using importlib.resources"""
-        return str(files('agiltron_gui.ui').joinpath(ui_filename))
+        return str(files('delayatron.ui').joinpath(ui_filename))
 
 else:
     import pkg_resources
@@ -181,7 +181,6 @@ class AgiltronController(QMainWindow):
         # Set up position display table
         self.update_position_display(0, 0)
 
-
     def set_controls_enabled(self, enabled: bool):
         """Enable/disable controls based on connection state"""
         self.btnCalibrateHome.setEnabled(enabled)
@@ -230,7 +229,7 @@ class AgiltronController(QMainWindow):
 
         try:
             self.device = AgiltronDelay(
-                port=port,
+                port=str(port),
                 baudrate=9600,
                 timeout=1.0,
                 wait=self.checkWaitForCompletion.isChecked(),
@@ -373,7 +372,7 @@ class AgiltronController(QMainWindow):
     def on_units_changed(self, index: int):
         """Handle global units change"""
         # Update spinbox properties based on selected unit
-        if index == 0:  # Stepss
+        if index == 0:  # Steps
             self.spinTargetPosition.setDecimals(0)
             self.spinTargetPosition.setMaximum(100000)
         elif index == 1:  # mm
