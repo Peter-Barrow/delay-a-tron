@@ -1,28 +1,27 @@
-#!/usr/bin/env python3
 """
 Agiltron Delay Stage Controller GUI
 Main application file that loads the UI and connects all functionality
 """
 
-import sys
 import csv
-from typing import Optional, List, Dict
+import sys
 from datetime import datetime
+from typing import Dict, List, Optional
 
-from PyQt6.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QFileDialog,
-    QMessageBox,
-    QTableWidgetItem,
-    QMenu,
-)
+from PyQt6 import uic
 from PyQt6.QtCore import QTimer, pyqtSignal
 from PyQt6.QtGui import QAction
-from PyQt6 import uic
+from PyQt6.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QMainWindow,
+    QMenu,
+    QMessageBox,
+    QTableWidgetItem,
+)
 
 # Import the Agiltron driver
-from .agiltron_delay import AgiltronDelay, MaxDelay, HomeStatus, discover
+from .agiltron_delay import AgiltronDelay, HomeStatus, MaxDelay, discover
 
 # Handle UI file loading from package resources
 if sys.version_info >= (3, 9):
@@ -30,14 +29,14 @@ if sys.version_info >= (3, 9):
 
     def get_ui_path(ui_filename):
         """Get path to UI file using importlib.resources"""
-        return str(files('delayatron.ui').joinpath(ui_filename))
+        return str(files('delay_a_tron.ui').joinpath(ui_filename))
 
 else:
     import pkg_resources
 
     def get_ui_path(ui_filename):
         """Get path to UI file using pkg_resources"""
-        return pkg_resources.resource_filename('agiltron_gui.ui', ui_filename)
+        return pkg_resources.resource_filename('delay_a_tron.ui', ui_filename)
 
 
 class AgiltronController(QMainWindow):
@@ -51,7 +50,9 @@ class AgiltronController(QMainWindow):
 
         # Load UI file
         # ui_path = Path(__file__).parent / 'agiltron_gui.ui'
-        ui_path = '/home/peterbarrow/Projects/delay-a-tron/src/delay_a_tron/ui/agiltron_gui.ui'
+
+        ui_path = get_ui_path('agiltron_gui.ui')
+        # ui_path = '/home/peterbarrow/Projects/delay-a-tron/src/delay_a_tron/ui/agiltron_gui.ui'
         uic.loadUi(ui_path, self)
 
         # Set splitter default position

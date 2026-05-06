@@ -1,10 +1,12 @@
-from enum import Enum
+import struct
+
 # from typing import Self
 from dataclasses import dataclass
+from enum import Enum
 from time import sleep
-import serial
-import struct
 from typing import List, Tuple
+
+import serial
 
 
 @dataclass(frozen=True)
@@ -552,7 +554,7 @@ class AgiltronDelay:
         """
         return hasattr(self, 'device') and self.device.is_open
 
-    def __enter__(self) -> 'AgiltronDelay':
+    def __enter__(self):
         """Enter context manager.
 
         Ensures the device connection is open before returning.
@@ -592,7 +594,7 @@ class AgiltronDelay:
             pass
 
 
-DEVICE_LIST = List[Tuple[str, serial.Serial]]
+DEVICE_LIST = list[tuple[str, serial.Serial]]
 
 
 def discover() -> DEVICE_LIST:
